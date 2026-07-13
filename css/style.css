@@ -1,0 +1,14 @@
+/* Custom animation for video soundwave equalizer pulse */
+    @keyframes pulse {
+      0% { transform: scaleY(0.3); }
+      100% { transform: scaleY(1); }
+    }
+    .equalizer-bar {
+      transition: height 0.15s ease-in-out;
+    }
+    .equalizer-active {
+      animation: pulse var(--pulse-duration, 0.8s) ease-in-out var(--pulse-delay, 0s) infinite alternate;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
