@@ -1,14 +1,43 @@
+/* Custom contrast rules requested by user */
+/* 1. Paragraphs on light/white backgrounds must always be highly legible soft off-black */
+.bg-brand-blanc p, 
+.bg-white p, 
+.bg-white\/60 p, 
+.bg-white\/80 p, 
+.bg-brand-ivoire\/50 p {
+  color: #1e293b !important;
+}
+
+/* 2. Blue backgrounds must have higher contrast text (white body, bright ivory labels) */
+.bg-brand-marine, 
+.bg-brand-navy {
+  color: #ffffff !important;
+}
+
+.bg-brand-marine p, 
+.bg-brand-navy p,
+.bg-brand-marine li,
+.bg-brand-navy li {
+  color: #ffffff !important;
+}
+
+.bg-brand-marine span:not(.text-brand-or):not(.text-brand-ciel), 
+.bg-brand-navy span:not(.text-brand-or):not(.text-brand-ciel) {
+  color: #fff8e1 !important; /* Luxe Ivory for labels */
+}
+
 /* Custom animation for video soundwave equalizer pulse */
-    @keyframes pulse {
-      0% { transform: scaleY(0.3); }
-      100% { transform: scaleY(1); }
-    }
-    .equalizer-bar {
-      transition: height 0.15s ease-in-out;
-    }
-    .equalizer-active {
-      animation: pulse var(--pulse-duration, 0.8s) ease-in-out var(--pulse-delay, 0s) infinite alternate;
-    }
-    html {
-      scroll-behavior: smooth;
-    }
+@keyframes pulse {
+  0% { transform: scaleY(0.3); }
+  100% { transform: scaleY(1); }
+}
+.equalizer-bar {
+  transition: height 0.15s ease-in-out;
+}
+.equalizer-active {
+  animation: pulse var(--pulse-duration, 0.8s) ease-in-out var(--pulse-delay, 0s) infinite alternate;
+}
+
+html {
+  scroll-behavior: smooth;
+}
