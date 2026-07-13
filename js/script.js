@@ -11,34 +11,34 @@ const stepsData = [
   {
     phase: "Fase 02 del plan de obra",
     title: "La Estructura",
-    subtitle: "Uniones y ritmo de la frase",
-    desc: "Alineamos cómo fluyen las oraciones. Conectamos palabras mediante el enchainement y la liaison para hablar sin tropiezos.",
+    subtitle: "Pronunciación y prosodia",
+    desc: "Aprendemos a conectar las palabras mediante la 'liaison' y el ritmo del idioma. El francés es una música continua; te enseñamos a construir el esqueleto de tus frases.",
     num: "#02",
-    ref: "Colocación de vigas maestras de carga."
+    ref: "Vigas de carga, uniones y estabilidad."
   },
   {
     phase: "Fase 03 del plan de obra",
-    title: "La Envoltura",
-    subtitle: "Entonación y modulación",
-    desc: "Trabajamos las pausas y la musicalidad del francés real para sonar natural e integrarte de verdad con hablantes nativos.",
+    title: "Los Ajustes",
+    subtitle: "Errores frecuentes y corrección",
+    desc: "Identificamos y corregimos de inmediato los hábitos del español que ensucian la claridad del francés. Ajustes milimétricos en la mandíbula y labios para un gran cambio de sonido.",
     num: "#03",
-    ref: "Impermeabilización y aislamiento termoacústico."
+    ref: "Nivelación, plomada y rectificación."
   },
   {
     phase: "Fase 04 del plan de obra",
-    title: "Los Interiores",
-    subtitle: "Afinación fina",
-    desc: "Ajustamos y pulimos detalles mínimos de pronunciación que marcan la gran diferencia entre hacerte entender y hablar con real solvencia.",
+    title: "Los Espacios Habitables",
+    subtitle: "Conversación y aplicación real",
+    desc: "Llevamos la teoría a situaciones cotidianas, laborales and sociales. De nada sirve una estructura hermosa si no puedes habitarla y comunicarte en el mundo real.",
     num: "#04",
-    ref: "Instalación de acabados finos y yesería."
+    ref: "Distribución interior y habitabilidad."
   },
   {
     phase: "Fase 05 del plan de obra",
     title: "Los Acabados",
     subtitle: "Naturalidad, confianza y fluidez",
-    desc: "Fijamos todo lo aprendido en escenarios simulados del día a día para que hables de corrido, con absoluta seguridad.",
+    desc: "Pulimos la entonación y el acento natural para que hables sin miedo a ser juzgado. Ganas esa confianza que te hace sonar seguro, auténtico y dueño de tu proceso.",
     num: "#05",
-    ref: "Entrega de obra llave en mano y control de calidad."
+    ref: "Revestimiento, pintura y detalles finales."
   }
 ];
 
@@ -58,24 +58,40 @@ function setActiveStep(index) {
   const buttons = document.querySelectorAll('.step-btn');
   buttons.forEach((btn, idx) => {
     const numText = btn.querySelector('.step-num');
+    const iconContainer = btn.querySelector('.shrink-0');
+    const titleText = btn.querySelector('h4');
     const subtitleText = btn.querySelector('.step-subtitle');
     const chevron = btn.querySelector('.step-chevron');
 
     if (idx === index) {
-      btn.className = "step-btn w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between gap-4 group cursor-pointer bg-brand-ivoire/40 border-brand-ciel text-brand-marine";
+      // Active state
+      btn.className = "step-btn w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between gap-4 group cursor-pointer bg-brand-marine border-brand-marine text-white shadow-md";
       if (numText) {
-        numText.className = "step-num font-mono text-sm font-bold text-brand-ciel";
+        numText.className = "step-num font-mono text-sm font-bold text-brand-or";
+      }
+      if (iconContainer) {
+        iconContainer.className = "shrink-0 p-2 rounded-lg bg-brand-ivoire/20 text-brand-or group-hover:scale-105 transition-transform";
+      }
+      if (titleText) {
+        titleText.className = "font-serif text-base font-bold leading-tight text-white";
       }
       if (subtitleText) {
-        subtitleText.className = "step-subtitle font-sans text-xs text-brand-or font-semibold";
+        subtitleText.className = "step-subtitle font-sans text-xs text-brand-ivoire/80";
       }
       if (chevron) {
-        chevron.className = "step-chevron w-4 h-4 text-brand-ciel opacity-100 transition-all duration-300";
+        chevron.className = "step-chevron w-4 h-4 text-brand-or translate-x-1 transition-all duration-300";
       }
     } else {
+      // Inactive state
       btn.className = "step-btn w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between gap-4 group bg-white border-brand-ivoire text-brand-marine hover:border-brand-ciel/50 cursor-pointer";
       if (numText) {
         numText.className = "step-num font-mono text-sm font-bold text-brand-ardoise";
+      }
+      if (iconContainer) {
+        iconContainer.className = "shrink-0 p-2 rounded-lg bg-brand-ivoire/50 text-brand-marine group-hover:scale-105 transition-transform";
+      }
+      if (titleText) {
+        titleText.className = "font-serif text-base font-bold leading-tight text-brand-marine";
       }
       if (subtitleText) {
         subtitleText.className = "step-subtitle font-sans text-xs text-brand-ardoise";
@@ -87,7 +103,18 @@ function setActiveStep(index) {
   });
 }
 
+// Bind to window to guarantee inline onclick attributes can access it
+window.setActiveStep = setActiveStep;
+
 document.addEventListener('DOMContentLoaded', () => {
+  // Programmatically bind click event listeners to steps for absolute reliability
+  const buttons = document.querySelectorAll('.step-btn');
+  buttons.forEach((btn, idx) => {
+    btn.addEventListener('click', () => {
+      setActiveStep(idx);
+    });
+  });
+
   // Initialize active method step
   setActiveStep(0);
   
